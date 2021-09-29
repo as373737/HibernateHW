@@ -12,6 +12,7 @@
         <property name="hibernate.current_session_context_class">thread</property>
 
 	
+		<mapping class="HibernateHW.model.Book"/>
 		
 	
 		

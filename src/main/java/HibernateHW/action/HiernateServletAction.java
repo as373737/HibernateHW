@@ -30,8 +30,7 @@ import HibernateHW.util.HibernateUtil;
 @WebServlet("/HiernateServlet.do")
 public class HiernateServletAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String CHARSET_CODE = null;
-	private static final String CONTENT_TYPE = null;
+	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -40,9 +39,7 @@ public class HiernateServletAction extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding(CHARSET_CODE);
-		response.setContentType(CONTENT_TYPE);
-
+	
 
 		if (request.getParameter("select") != null)
 			gotoSelect(request, response);
@@ -83,9 +80,10 @@ public class HiernateServletAction extends HttpServlet {
 		 BookDao bDao= new BookDao(session);
 		 request.getSession(true).setAttribute("select", saveBean);
 		 try {
+			 
 			 factory = HibernateUtil.getSessionFactory();
 			 session = factory.getCurrentSession();
-			 
+			 System.out.println("QQ");
 			saveBean.setBookname(bookname);
 			saveBean.setAuthor(author);
 			saveBean.setPrice(Price);
