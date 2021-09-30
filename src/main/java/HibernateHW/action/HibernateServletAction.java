@@ -1,9 +1,11 @@
 package HibernateHW.action;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -27,6 +29,7 @@ import HibernateHW.util.HibernateUtil;
 
 
 
+
 @WebServlet("/HibernateServletAction.do")
 public class HibernateServletAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -39,16 +42,46 @@ public class HibernateServletAction extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		 
+		gotoSelectAll(request, response);
 
 		if (request.getParameter("select") != null)
 			gotoSelect(request, response);
+		else if (request.getParameter("selectAll") != null)
+			gotoSelectAll(request, response);
 		else if (request.getParameter("delete") != null)
 			gotoDelete(request, response);
 		else if (request.getParameter("update") != null)
 			gotoUpdate(request, response);
 		else if (request.getParameter("insert") != null)
 			gotoInsert(request, response);
+		else if (request.getParameter("login") != null)
+			gotoLogin(request, response);
+	}
+
+	private void gotoSelectAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		Query<Book> query = session.createQuery("from Book", Book.class);
+		List<Book> lists = query.list();
+		
+		for(Book hBean:lists) {
+			out.write("Book ID:" + hBean.getId() + "<br/>");
+			out.write("Book Name:" + hBean.getBookname() + "<br/>");
+			out.write("Book Author:" + hBean.getAuthor() + "<br/>");
+			out.write("Book Price:" + hBean.getPrice() + "<br/>");
+		}
+		
+		out.close();
+	}
+	
+
+	private void gotoLogin(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void gotoSelect(HttpServletRequest request, HttpServletResponse response) {	
@@ -81,15 +114,12 @@ public class HibernateServletAction extends HttpServlet {
 		 book.setBookname(bookname);
 		 book.setAuthor(author);
 		 book.setPrice(Price);
-		 request.getSession(true).setAttribute("select", book);
+		
 		 try {
 			 BookDao bDao = new BookDao(session);
 			 bDao .insert(book);
 			 System.out.println("success");
-			 
-			request.getSession(true).invalidate();
-			request.getRequestDispatcher("/insertsuccess.jsp").forward(request, response);
-		 
+			 	 
 		 }catch (Exception e) {
 			e.printStackTrace();
 		}finally {
