@@ -39,7 +39,7 @@ public class HibernateServletAction extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		 System.out.println("in");
+		 
 
 		if (request.getParameter("select") != null)
 			gotoSelect(request, response);
@@ -51,8 +51,8 @@ public class HibernateServletAction extends HttpServlet {
 			gotoInsert(request, response);
 	}
 
-	public void gotoSelect(HttpServletRequest request, HttpServletResponse response) {
-
+	public void gotoSelect(HttpServletRequest request, HttpServletResponse response) {	
+		
 	}
 
 	public void gotoDelete(HttpServletRequest request, HttpServletResponse response) {
@@ -65,7 +65,7 @@ public class HibernateServletAction extends HttpServlet {
 
 	public void gotoInsert(HttpServletRequest request, HttpServletResponse response) {
 		 response.setContentType("text/html;charset=UTF-8");
-		 System.out.println("in2");
+
 		 SessionFactory factory=HibernateUtil.getSessionFactory();
 		 Session session = factory.getCurrentSession();
 		 String bookname;
@@ -85,10 +85,11 @@ public class HibernateServletAction extends HttpServlet {
 		 try {
 			 BookDao bDao = new BookDao(session);
 			 bDao .insert(book);
-			 request.setAttribute("info", "新增成功！！！");
+			 System.out.println("success");
 			 
-		
-			 
+			request.getSession(true).invalidate();
+			request.getRequestDispatcher("/insertsuccess.jsp").forward(request, response);
+		 
 		 }catch (Exception e) {
 			e.printStackTrace();
 		}finally {

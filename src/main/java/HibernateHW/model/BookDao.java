@@ -4,7 +4,11 @@ import java.util.List;
 
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import HibernateHW.util.HibernateUtil;
+
+
 
 
 
@@ -17,22 +21,23 @@ public class BookDao implements IBookDao {
 	@Override
 	public Book insert(Book book) {
 	
-		session.beginTransaction();
-		 Book bBean = book;
+	System.out.println("book = "+book.getBookname());
 	
+		Book bBean = new Book();
+		bBean.setBookname(book.getBookname());
+		bBean.setAuthor(book.getAuthor());
+		bBean.setPrice(book.getPrice());
+		session.save(bBean);
+		session.getTransaction().commit();
 		
-		if(bBean==null) {
-			session.save(book);
-			return book;
-		}
-		
-		return null;	
+		return book;	
 		
 	}
 
 	@Override
 	public Book selectById(int bookid) {
-		// TODO Auto-generated method stub
+		
+		
 		return null;
 	}
 
