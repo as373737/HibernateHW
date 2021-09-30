@@ -119,15 +119,14 @@ public class HibernateServletAction extends HttpServlet {
 		 try {
 			 BookDao bDao = new BookDao(session);
 			 bDao .insert(book);
-			 System.out.println("success");
+			 System.out.println("success123");
 			 
-//			request.getSession(true).invalidate();
-//			request.getRequestDispatcher("/insertsuccess.jsp").forward(request, response);
+			request.getRequestDispatcher("/insertsuccess.jsp").forward(request, response);
 			 	 
 		 }catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			HibernateUtil.closeSessionFactory();
+			
 		}
 		 
 		 

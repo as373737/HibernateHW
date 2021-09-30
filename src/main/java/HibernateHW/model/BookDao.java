@@ -28,11 +28,12 @@ public class BookDao implements IBookDao {
 		bBean.setAuthor(book.getAuthor());
 		bBean.setPrice(book.getPrice());
 		session.save(bBean);
+		session.getTransaction().commit();
 		}catch (Exception e) {
 		session.getTransaction().rollback();
 		System.out.println("有錯");
 	}finally {
-		HibernateUtil.closeSessionFactory();
+//		HibernateUtil.closeSessionFactory();
 	}
 		
 		
