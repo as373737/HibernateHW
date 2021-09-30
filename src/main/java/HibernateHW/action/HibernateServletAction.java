@@ -27,8 +27,8 @@ import HibernateHW.util.HibernateUtil;
 
 
 
-@WebServlet("/HiernateServlet.do")
-public class HiernateServletAction extends HttpServlet {
+@WebServlet("/HibernateServletAction.do")
+public class HibernateServletAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 
@@ -39,7 +39,7 @@ public class HiernateServletAction extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
+		 System.out.println("in");
 
 		if (request.getParameter("select") != null)
 			gotoSelect(request, response);
@@ -65,6 +65,7 @@ public class HiernateServletAction extends HttpServlet {
 
 	public void gotoInsert(HttpServletRequest request, HttpServletResponse response) {
 		 response.setContentType("text/html;charset=UTF-8");
+		 System.out.println("in2");
 		 SessionFactory factory=HibernateUtil.getSessionFactory();
 		 Session session = factory.getCurrentSession();
 		 String bookname;
@@ -76,24 +77,22 @@ public class HiernateServletAction extends HttpServlet {
 		 
 	
 		 int Price = Integer.parseInt(price);
-		 Book saveBean =new Book(bookname,author,Price);
-		 BookDao bDao= new BookDao(session);
-		 request.getSession(true).setAttribute("select", saveBean);
+		 Book book =new Book();
+		 book.setBookname(bookname);
+		 book.setAuthor(author);
+		 book.setPrice(Price);
+		 request.getSession(true).setAttribute("select", book);
 		 try {
+			 BookDao bDao = new BookDao(session);
+			 bDao .insert(book);
+			 request.setAttribute("info", "新增成功！！！");
 			 
-			 factory = HibernateUtil.getSessionFactory();
-			 session = factory.getCurrentSession();
-			 System.out.println("QQ");
-			saveBean.setBookname(bookname);
-			saveBean.setAuthor(author);
-			saveBean.setPrice(Price);
-			bDao.insert(saveBean);
-			 
+		
 			 
 		 }catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}finally {
-			
+			HibernateUtil.closeSessionFactory();
 		}
 		 
 		 

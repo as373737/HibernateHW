@@ -1,5 +1,6 @@
 package HibernateHW.util;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -16,6 +17,11 @@ public class HibernateUtil {
 	public static SessionFactory getSessionFactory() {
 		return factory;
 	}
+	public static Session getSession() {
+		//如果SessionFacroty不為空，則開啟Session
+		Session session = (factory != null) ? factory.openSession() : null;
+		return session;
+		}
 	
 	public static void closeSessionFactory() {
 		if(factory!=null) {

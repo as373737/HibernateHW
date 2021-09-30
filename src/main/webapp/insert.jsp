@@ -12,7 +12,7 @@
 	作者:<input type="text" name="author"><br>
 	價格:<input type="text" name="price"><br>
 	
-	<button type="submit" name="insert">送出</button>
+	<button type="submit"  name="insert">送出</button>
 </form>
 </body>
 </html>

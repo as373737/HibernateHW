@@ -2,23 +2,26 @@ package HibernateHW.model;
 
 import java.util.List;
 
+
 import org.hibernate.Session;
+import HibernateHW.util.HibernateUtil;
 
 
 
 public class BookDao implements IBookDao {
-	private Session session;
+	private Session session ;
 	public BookDao(Session session) {
         this.session = session;
 	}
 	
 	@Override
 	public Book insert(Book book) {
-		 Book resultBean = session.get(Book.class, book.getBookname());
-		 resultBean = session.get(Book.class, book.getAuthor());
-		 resultBean = session.get(Book.class, book.getPrice());
+	
+		session.beginTransaction();
+		 Book bBean = book;
+	
 		
-		if(resultBean==null) {
+		if(bBean==null) {
 			session.save(book);
 			return book;
 		}
