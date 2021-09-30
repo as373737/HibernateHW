@@ -55,7 +55,26 @@ public class HibernateServletAction extends HttpServlet {
 		
 	}
 
-	public void gotoDelete(HttpServletRequest request, HttpServletResponse response) {
+	public void gotoDelete(HttpServletRequest request, HttpServletResponse response) {		
+		 response.setContentType("text/html;charset=UTF-8");
+		 SessionFactory factory=HibernateUtil.getSessionFactory();
+		 Session session = factory.getCurrentSession();
+			 
+		 int id;
+		 id = Integer.parseInt(request.getParameter("bookname").trim());
+		 request.getSession(true).setAttribute("delete", id);
+		 try {
+			 BookDao bDao = new BookDao(session);
+			 //開始山
+			 bDao.deleteById(id);		 
+			 //刪掉session
+			request.getSession(true).invalidate();
+			request.getRequestDispatcher("/insertsuccess.jsp").forward(request, response);
+		 }catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+//			HibernateUtil.closeSessionFactory();   先不關 不然不能回首頁
+		}
 
 	}
 
@@ -66,6 +85,7 @@ public class HibernateServletAction extends HttpServlet {
 	public void gotoInsert(HttpServletRequest request, HttpServletResponse response) {
 		 response.setContentType("text/html;charset=UTF-8");
 
+		 System.out.println("開始新增資料");
 		 SessionFactory factory=HibernateUtil.getSessionFactory();
 		 Session session = factory.getCurrentSession();
 		 String bookname;

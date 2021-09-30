@@ -12,6 +12,7 @@ import HibernateHW.util.HibernateUtil;
 
 
 
+
 public class BookDao implements IBookDao {
 	private Session session ;
 	public BookDao(Session session) {
@@ -23,11 +24,13 @@ public class BookDao implements IBookDao {
 	
 	System.out.println("book = "+book.getBookname());
 	
+	
 		Book bBean = new Book();
 		bBean.setBookname(book.getBookname());
 		bBean.setAuthor(book.getAuthor());
 		bBean.setPrice(book.getPrice());
 		session.save(bBean);
+		
 		session.getTransaction().commit();
 		
 		return book;	
@@ -54,9 +57,21 @@ public class BookDao implements IBookDao {
 	}
 
 	@Override
-	public boolean deleteById(int bookid) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteById(int id) {
+		// 刪除
+		
+		
+
+		System.out.println("ID = "+id);
+		
+			Book bBean = new Book();
+			bBean.setId(id);
+			
+	
+			session.delete(bBean);
+			session.getTransaction().commit();
+			
+		return true;
 	}
 
 }

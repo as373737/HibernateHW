@@ -8,6 +8,8 @@
 </head>
 <body>
 INSERT SUCCESS ! ! !<br>
+
+
 <a href="home.jsp">回首頁</a><br><br><br>
 </body>
 </html>
