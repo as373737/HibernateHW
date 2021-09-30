@@ -13,6 +13,8 @@
 	
 	<button type="submit"  name="select">送出</button>
 </form>
-<button type="submit"  name="selectALL">查詢全部</button>
+
+	<a href="./HibernateServletAction.do"><button type="submit"  name="selectALL">查詢全部</button></a>
+
 </body>
 </html>

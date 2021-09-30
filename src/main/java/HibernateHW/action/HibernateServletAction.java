@@ -42,11 +42,11 @@ public class HibernateServletAction extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		gotoSelectAll(request, response);
+		
 
 		if (request.getParameter("select") != null)
 			gotoSelect(request, response);
-		else if (request.getParameter("selectAll") != null)
+		else if (request.getParameter("selectALL") != null)
 			gotoSelectAll(request, response);
 		else if (request.getParameter("delete") != null)
 			gotoDelete(request, response);
@@ -59,9 +59,10 @@ public class HibernateServletAction extends HttpServlet {
 	}
 
 	private void gotoSelectAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println("IN");
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		
+		System.out.println("IN");
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session session = factory.getCurrentSession();
 		
@@ -69,9 +70,9 @@ public class HibernateServletAction extends HttpServlet {
 		List<Book> lists = query.list();
 		
 		for(Book hBean:lists) {
-			out.write("Book ID:" + hBean.getId() + "<br/>");
-			out.write("Book Name:" + hBean.getBookname() + "<br/>");
-			out.write("Book Author:" + hBean.getAuthor() + "<br/>");
+			out.write("Book ID:" + hBean.getId() + ",");
+			out.write("Book Name:" + hBean.getBookname() + ",");
+			out.write("Book Author:" + hBean.getAuthor() + ",");
 			out.write("Book Price:" + hBean.getPrice() + "<br/>");
 		}
 		
@@ -119,6 +120,9 @@ public class HibernateServletAction extends HttpServlet {
 			 BookDao bDao = new BookDao(session);
 			 bDao .insert(book);
 			 System.out.println("success");
+			 
+//			request.getSession(true).invalidate();
+//			request.getRequestDispatcher("/insertsuccess.jsp").forward(request, response);
 			 	 
 		 }catch (Exception e) {
 			e.printStackTrace();
