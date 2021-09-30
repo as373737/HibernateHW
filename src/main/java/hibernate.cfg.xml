@@ -11,9 +11,7 @@
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.current_session_context_class">thread</property>
 
-	
-		<mapping class="HibernateHW.model.Book"/>
-		
+		<mapping resource="/HibernateHW/model/Book.hbm.xml" />
 	
 		
 		

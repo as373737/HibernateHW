@@ -2,20 +2,17 @@ package HibernateHW.model;
 
 public class Book {
 	
-
+	private int bookid;
+	public int getBookid() {
+		return bookid;
+	}
+	public void setBookid(int bookid) {
+		this.bookid = bookid;
+	}
 	private String bookname;
 	private String author;
 	private int price;
 	
-	public Book() {
-		
-	}
-	public Book(String bookname, String author, int price) {
-
-		this.bookname=bookname;
-		this.author=author;
-		this.price=price;
-	}
 
 	public String getBookname() {
 		return bookname;
