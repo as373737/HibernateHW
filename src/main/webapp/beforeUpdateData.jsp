@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="BIG5">
-<title>Insert title here</title>
+<title>修改資料</title>
 </head>
 <body>
 <body>
@@ -50,6 +50,7 @@
  </table>
        <button name="update2" id="submit" type="submit">送出</button>
  </form>
+        <button name="return" id="return" type="submit">返回</button>
  	   
 
 
@@ -64,6 +65,13 @@ $("#submit").click(function(){
 	$("input").prop("disabled",false);
 
 	});
+
+$("#return").click(function(){
+
+	$(location).attr('href', 'update.jsp');
+
+});
+
 
 </script>
 </body>
