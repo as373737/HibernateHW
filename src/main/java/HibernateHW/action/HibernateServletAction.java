@@ -20,6 +20,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+
 import HibernateHW.model.Book;
 import HibernateHW.model.BookDao;
 import HibernateHW.util.HibernateUtil;
@@ -86,7 +87,7 @@ public class HibernateServletAction extends HttpServlet {
 			  
 		  }else {
 			  try {
-				response.sendRedirect("/home.jsp"); //改
+				response.sendRedirect("failUpdate.jsp");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
