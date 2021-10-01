@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import HibernateHW.util.HibernateUtil;
 
@@ -42,16 +43,15 @@ public class BookDao implements IBookDao {
 	}
 
 	@Override
-	public Book selectById(int bookid) {
-		
-		
-		return null;
+	public List<Book> selectAll() {
+		Query<Book> query = session.createQuery("from Book", Book.class);
+		return query.list();
 	}
 
 	@Override
-	public List<Book> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Book> selectLikeName(String name) {
+		Query<Book> query = session.createQuery("from Book where bookname like '%"+name+"%'", Book.class);
+		return query.list();
 	}
 
 	@Override
