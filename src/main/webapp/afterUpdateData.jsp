@@ -14,12 +14,12 @@
  %>
  <h1 class="p">書籍資訊</h1>
 
- <form>
+ <form  action="./HibernateServletAction.do" method="post">
  <table >
  <tr>
  	<td width="20%">書籍代號</td>
  	<td width="80%">
- 	<input type="text" name="bookId" id="" value="<%=b.getId() %>" disabled>
+ 	<input type="text" name="updateid" id="" value="<%=b.getId() %>" disabled>
  	</td> 
  	
  </tr>
@@ -47,17 +47,29 @@
    
    
  </table>
+ 	    <button name="update" id="update" type="submit">返回</button>
  	   
 
  </form>
-       <button name="confirm" type="submit">確定</button>
-       <button name="return" type="submit">返回</button>
+       <button name="confirm" id="confirm" type="submit">確定</button>
 
   
 
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 
+$("#update").click(function(){
+
+	$("input").prop("disabled",false);
+
+	});
+
+
+$("#confirm").click(function(){
+
+	$(location).attr('href', 'updateSuccess.jsp');
+
+	});
 
 
 </script>
