@@ -1,24 +1,14 @@
 package HibernateHW.action;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.servlet.ServletConfig;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 
 import HibernateHW.model.Book;
 import HibernateHW.model.BookDao;
@@ -43,6 +33,8 @@ public class HibernateServletAction extends HttpServlet {
 
 		if (request.getParameter("select") != null)
 			gotoSelect(request, response);
+		else if (request.getParameter("selectALL")!=null)
+			gotoSelectAll(request,response);
 		else if (request.getParameter("delete") != null)
 			gotoDelete(request, response);
 		else if (request.getParameter("update") != null)
@@ -51,9 +43,25 @@ public class HibernateServletAction extends HttpServlet {
 			gotoInsert(request, response);
 	}
 
-	public void gotoSelect(HttpServletRequest request, HttpServletResponse response) {	
-		
+	public void gotoSelect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		BookDao bDao = new BookDao(session);
+		String bookname = request.getParameter("bookname");
+		List<Book> resultBean = bDao.selectLikeName(bookname);
+		request.getSession(true).setAttribute("resultBean", resultBean);
+		request.getRequestDispatcher("/select.jsp").forward(request, response);
 	}
+	
+	public void gotoSelectAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		BookDao bDao = new BookDao(session);
+		List<Book> resultList = bDao.selectAll();
+		request.getSession(true).setAttribute("resultList", resultList);
+		request.getRequestDispatcher("/select.jsp").forward(request, response);
+	}
+
 
 	public void gotoDelete(HttpServletRequest request, HttpServletResponse response) {
 

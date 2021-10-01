@@ -12,7 +12,6 @@
 	<a href="update.jsp"><input name="update" type="submit" value="修改"></a>
 	<a href="delete.jsp"><input name="delete" type="submit" value="刪除"></a>
 	<a href="select.jsp"><input name="select" type="submit" value="查詢"></a>
-
 	
 </body>
 </html>
