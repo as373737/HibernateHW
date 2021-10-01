@@ -14,14 +14,14 @@
 		Swal.fire({
 			position : 'center',
 			icon : 'success',
-			title : '修改成功 ! !',
+			title : '修改完成 ! !',
 
 			showConfirmButton : false,
 			timer : 3000
 		})
 
 		window.setTimeout(function() {
-			location.href = "./afterUpdateData";
+			location.href = "./home.jsp";
 		}, 1000);
 	</script>
 
