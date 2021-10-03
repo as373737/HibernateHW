@@ -102,21 +102,31 @@ input, textarea, select {
        <h4 style="font-size: 20px;">請則一輸入 (書名 or ID)</h4>
     <tr>
      <td>請輸入書名 :</td>
-     <td><input type="text" class="inputClass" name="bookname"> <br/></td>
+     <td><input type="text" class="inputClass" name="bookname">
+
+        <div class="wrap">
+            <button type="submit" name="deleteByName" class="button">使用書名刪除</button>
+        </div>
+    
+    </td>
     </tr>
     <tr>
      <td>請輸入ID :</td>
      <td><label for="proName"></label> <input type="text" 
-         class="inputClass" name="bookid"><br /></td>
+         class="inputClass" name="bookid">
+
+
+         <div class="wrap">
+            <button type="submit" name="deleteById" class="button">使用ID刪除</button>
+        </div>
+        
+        </td>
     </tr>
 
 
     
    </table>
-    <div class="wrap">
-        <button type="submit" name="delete" class="button">確認送出</button>
-  
-    </div>
+
   
   </form>
  </div>

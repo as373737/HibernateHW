@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -43,8 +44,10 @@ public class HibernateServletAction extends HttpServlet {
 
 		if (request.getParameter("select") != null)
 			gotoSelect(request, response);
-		else if (request.getParameter("delete") != null)
-			gotoDelete(request, response);
+		else if (request.getParameter("deleteByName") != null)
+			gotoDeleteByName(request, response);
+		else if (request.getParameter("deleteById") != null)
+			gotoDeleteById(request, response);
 		else if (request.getParameter("update") != null)
 			gotoUpdate(request, response);
 		else if (request.getParameter("insert") != null)
@@ -55,38 +58,37 @@ public class HibernateServletAction extends HttpServlet {
 		
 	}
 
-	public void gotoDelete(HttpServletRequest request, HttpServletResponse response) {		
-		 response.setContentType("text/html;charset=UTF-8");
+	public void gotoDeleteById(HttpServletRequest request, HttpServletResponse response) {		
 		 SessionFactory factory=HibernateUtil.getSessionFactory();
-		 Session session = factory.getCurrentSession();
-			 
-		 int id=0;
-		 id = Integer.parseInt(request.getParameter("bookid").trim());
-		 request.getSession(true).setAttribute("delete", id);
-		 
-		//測試用名子山 (先名子selete到ID再用ID去山)
-		 String bookname="";
-		 bookname=request.getParameter("bookname").trim();
-		 System.out.println("bookname=" +bookname);
-		 request.getSession(true).setAttribute("delete2", bookname);
+		 Session session = factory.getCurrentSession();		 
+		 int id = Integer.parseInt(request.getParameter("bookid").trim());
+		 request.getSession(true).setAttribute("delete", id);		 
+		
 		 try {
 			 BookDao bDao = new BookDao(session);
 			 //開始山
-//			 bDao.deleteById(id);
-			 
-			 System.out.println("bookname2=" +bookname);
-			 //測試用名子山
-			 bDao.deleteById(id,bookname);
-			 
+			 bDao.deleteById(id);
+			  
 			 //刪掉session
 			request.getSession(true).invalidate();
-			request.getRequestDispatcher("/insertsuccess.jsp").forward(request, response);
+			request.getRequestDispatcher("/deleteSuccess.jsp").forward(request, response);
 		 }catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 //			HibernateUtil.closeSessionFactory();   先不關 不然不能回首頁
 		}
-
+	}
+	
+	public void gotoDeleteByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		BookDao bDao = new BookDao(session);
+		String bookname = request.getParameter("bookname");
+		System.out.println("準備開始執行Delete By Name方法");
+		List<Book> resultBean = bDao.deleteByName(bookname);
+		System.out.println("執行完畢");
+		request.getSession(true).setAttribute("resultBean", resultBean);
+		request.getRequestDispatcher("/deleteSuccess.jsp").forward(request, response);
 	}
 
 	public void gotoUpdate(HttpServletRequest request, HttpServletResponse response) {
