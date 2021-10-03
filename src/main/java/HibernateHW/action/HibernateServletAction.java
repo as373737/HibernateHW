@@ -73,6 +73,7 @@ public class HibernateServletAction extends HttpServlet {
 		
 	}
 
+
 	public void gotoSelect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session session = factory.getCurrentSession();
@@ -83,9 +84,42 @@ public class HibernateServletAction extends HttpServlet {
 		request.getRequestDispatcher("/select.jsp").forward(request, response);
 	}
 
-	public void gotoDelete(HttpServletRequest request, HttpServletResponse response) {
-
+	
+	public void gotoDelete(HttpServletRequest request, HttpServletResponse response) {		
+		 response.setContentType("text/html;charset=UTF-8");
+		 SessionFactory factory=HibernateUtil.getSessionFactory();
+		 Session session = factory.getCurrentSession();
+			 
+		 int id=0;
+		 id = Integer.parseInt(request.getParameter("bookid").trim());
+		 request.getSession(true).setAttribute("delete", id);
+		 
+		//測試用名子山 (先名子selete到ID再用ID去山)
+		 String bookname="";
+		 bookname=request.getParameter("bookname").trim();
+		 System.out.println("bookname=" +bookname);
+		 request.getSession(true).setAttribute("delete2", bookname);
+		 try {
+			 BookDao bDao = new BookDao(session);
+			 //開始山
+//			 bDao.deleteById(id);
+			 
+			 System.out.println("bookname2=" +bookname);
+			 //測試用名子山
+			 bDao.deleteById(id,bookname);
+			 
+			 //刪掉session
+			request.getSession(true).invalidate();
+			request.getRequestDispatcher("/insertsuccess.jsp").forward(request, response);
+		 }catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+//			HibernateUtil.closeSessionFactory();   先不關 不然不能回首頁
+		}
 	}
+
+
+	
 
 	public void gotoUpdate(HttpServletRequest request, HttpServletResponse response) {
 
@@ -94,6 +128,7 @@ public class HibernateServletAction extends HttpServlet {
 	public void gotoInsert(HttpServletRequest request, HttpServletResponse response) {
 		 response.setContentType("text/html;charset=UTF-8");
 
+		 System.out.println("開始新增資料");
 		 SessionFactory factory=HibernateUtil.getSessionFactory();
 		 Session session = factory.getCurrentSession();
 		 String bookname;
