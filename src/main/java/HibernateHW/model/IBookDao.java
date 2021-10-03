@@ -8,7 +8,7 @@ public interface IBookDao {
 	public Book insert(Book boook);
 	public List<Book> selectLikeName(String name);
 	public List<Book> selectAll();
-    public Book update(int bookid, String bookname,int price);
+    public Book update(Book book);
     public boolean deleteById(int bookid);
     public List<Book> deleteByName(String name);
 }

@@ -22,6 +22,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+
 import HibernateHW.model.Book;
 import HibernateHW.model.BookDao;
 import HibernateHW.util.HibernateUtil;
@@ -57,11 +58,16 @@ public class HibernateServletAction extends HttpServlet {
 			gotoDeleteById(request, response);
 
 		else if (request.getParameter("update") != null)
-			gotoUpdate(request, response);
+			gotoDisplayUpdateData(request, response);
 		else if (request.getParameter("insert") != null)
 			gotoInsert(request, response);
+
 		else if (request.getParameter("login") != null)
 			gotoLogin(request, response);
+
+		else if (request.getParameter("update2") != null)
+			gotoUpdate(request, response);
+
 	}
 
 	private void gotoSelectAll(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -132,8 +138,73 @@ public class HibernateServletAction extends HttpServlet {
 
 	
 
+	public void gotoDisplayUpdateData(HttpServletRequest request, HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");
+		
+		 SessionFactory factory=HibernateUtil.getSessionFactory();
+		 Session session = factory.getCurrentSession();
+		 
+		 int bookId;
+		 
+		 bookId =Integer.parseInt(request.getParameter("updateid"));
+		 
+		  BookDao bDao = new BookDao(session);
+		  Book book = bDao.selectById(bookId);
+		  if(book!=null) {
+			  request.getSession(true).setAttribute("update", book);
+			  
+			  try {
+				  request.getRequestDispatcher("/beforeUpdateData.jsp").forward(request, response);
+			  } catch (ServletException e) {
+				  e.printStackTrace();
+			  } catch (IOException e) {
+				  e.printStackTrace();
+			  }
+			  
+		  }else {
+			  try {
+				response.sendRedirect("failUpdate.jsp");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		  
+		 
+	}
+	
 	public void gotoUpdate(HttpServletRequest request, HttpServletResponse response) {
-
+		response.setContentType("text/html;charset=UTF-8");
+		
+		 SessionFactory factory=HibernateUtil.getSessionFactory();
+		 Session session = factory.getCurrentSession();
+		 
+		 int bookId;
+		 String bookname;
+		 String author;
+		 int price;	
+		 
+		  bookId = Integer.parseInt(request.getParameter("bookId"));
+		  bookname = request.getParameter("bookname").trim();
+		  author= request.getParameter("author").trim();
+		  price = Integer.parseInt(request.getParameter("price"));
+		  
+		  Book book = new Book();
+		  book.setId(bookId);
+		  book.setBookname(bookname);
+		  book.setAuthor(author);
+		  book.setPrice(price);		
+		  
+		  BookDao bDao= new BookDao(session);
+		   Book updateBook = bDao.update(book);
+		  if(updateBook!=null) {
+			  request.getSession(true).setAttribute("updateBook", updateBook);
+			  try {
+				request.getRequestDispatcher("./afterUpdateData.jsp").forward(request, response);
+			} catch (ServletException | IOException e) {
+				e.printStackTrace();
+			}
+		  }
+		  
 	}
 
 	public void gotoInsert(HttpServletRequest request, HttpServletResponse response) {

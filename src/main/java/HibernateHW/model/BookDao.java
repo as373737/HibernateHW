@@ -40,9 +40,16 @@ public class BookDao implements IBookDao {
 	}
 
 	@Override
+
 	public List<Book> selectAll() {
 		Query<Book> query = session.createQuery("from Book", Book.class);
 		return query.list();
+	}
+
+	public Book selectById(int bookid) {
+		
+		return session.get(Book.class, bookid);
+
 	}
 
 	@Override
@@ -52,9 +59,24 @@ public class BookDao implements IBookDao {
 	}
 
 	@Override
-	public Book update(int bookid, String bookname, int price) {
-		// TODO Auto-generated method stub
-		return null;
+	public Book update(Book book) {
+		
+		
+		String hql="update Book set bookname=:bname,author=:bauthor,price=:bprice where id=:bid";
+
+		Query query = session.createQuery(hql);
+		query.setParameter("bname", book.getBookname());
+		query.setParameter("bauthor", book.getAuthor());
+		query.setParameter("bprice", book.getPrice());
+		query.setParameter("bid", book.getId());
+		
+		int count = query.executeUpdate();
+		if(count>0) {
+			return book;
+		}
+			return null;
+		
+		
 	}
 
 	@Override
