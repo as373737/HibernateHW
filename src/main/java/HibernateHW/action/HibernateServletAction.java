@@ -60,13 +60,24 @@ public class HibernateServletAction extends HttpServlet {
 		 SessionFactory factory=HibernateUtil.getSessionFactory();
 		 Session session = factory.getCurrentSession();
 			 
-		 int id;
-		 id = Integer.parseInt(request.getParameter("bookname").trim());
+		 int id=0;
+		 id = Integer.parseInt(request.getParameter("bookid").trim());
 		 request.getSession(true).setAttribute("delete", id);
+		 
+		//測試用名子山 (先名子selete到ID再用ID去山)
+		 String bookname="";
+		 bookname=request.getParameter("bookname").trim();
+		 System.out.println("bookname=" +bookname);
+		 request.getSession(true).setAttribute("delete2", bookname);
 		 try {
 			 BookDao bDao = new BookDao(session);
 			 //開始山
-			 bDao.deleteById(id);		 
+//			 bDao.deleteById(id);
+			 
+			 System.out.println("bookname2=" +bookname);
+			 //測試用名子山
+			 bDao.deleteById(id,bookname);
+			 
 			 //刪掉session
 			request.getSession(true).invalidate();
 			request.getRequestDispatcher("/insertsuccess.jsp").forward(request, response);

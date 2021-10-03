@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import HibernateHW.util.HibernateUtil;
+
 
 
 
@@ -57,18 +59,41 @@ public class BookDao implements IBookDao {
 	}
 
 	@Override
-	public boolean deleteById(int id) {
+	public boolean deleteById(int id,String bookname) {
 		// 刪除
 		
 		
-
+		//用ID刪
 		System.out.println("ID = "+id);
 		
-			Book bBean = new Book();
-			bBean.setId(id);
+//			Book bBean = new Book();
+//			bBean.setId(id);
+//			
+//	
+//			session.delete(bBean);
+//			session.getTransaction().commit();
 			
-	
-			session.delete(bBean);
+			
+			//=============================================用名子刪
+			System.out.println("ID = "+id);
+			System.out.println("bookname = "+bookname);
+			
+			Book book=session.get(Book.class, bookname);
+			if(book!=null){
+				System.out.println("=====查找結果 : "+book.getId()+" : "+book.getBookname());		
+			} else {
+				System.out.println("No result");
+			}
+			
+
+			
+			
+//			Book bBean2 = new Book();
+//			bBean2.setBookname(bookname);
+//			session.get("bookname", bookname);
+//			System.out.println("bookname = "+bookname);
+//	
+//			session.delete(bBean);
 			session.getTransaction().commit();
 			
 		return true;
