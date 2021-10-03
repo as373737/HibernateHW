@@ -11,7 +11,7 @@
 
 </head>
 <body>
-<<<<<<< HEAD
+
 
     <script>
                 Swal.fire({
@@ -28,11 +28,7 @@
     </script>
 
 
-=======
-INSERT SUCCESS ! ! !<br>
 
 
-<a href="home.jsp">回首頁</a><br><br><br>
->>>>>>> refs/heads/JCIH2-Dev
 </body>
 </html>
