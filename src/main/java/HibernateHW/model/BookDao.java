@@ -74,7 +74,7 @@ public class BookDao implements IBookDao {
 //			session.getTransaction().commit();
 			
 			
-			//=============================================用名子刪
+			//=============================================用名子刪 測試中
 			System.out.println("ID = "+id);
 			System.out.println("bookname = "+bookname);
 			
