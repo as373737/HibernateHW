@@ -1,5 +1,5 @@
 package HibernateHW.action;
 
-public class ForPull2 {
+public class ForPull5 {
 
 }

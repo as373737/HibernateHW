@@ -58,44 +58,36 @@ public class BookDao implements IBookDao {
 	}
 
 	@Override
-	public boolean deleteById(int id,String bookname) {
-		// 刪除
-		
-		
-		//用ID刪
-		System.out.println("ID = "+id);
-		
-//			Book bBean = new Book();
-//			bBean.setId(id);
-//			
-//	
-//			session.delete(bBean);
-//			session.getTransaction().commit();
-			
-			
-			//=============================================用名子刪
-			System.out.println("ID = "+id);
-			System.out.println("bookname = "+bookname);
-			
-			Book book=session.get(Book.class, bookname);
-			if(book!=null){
-				System.out.println("=====查找結果 : "+book.getId()+" : "+book.getBookname());		
-			} else {
-				System.out.println("No result");
-			}
-			
-
-			
-			
-//			Book bBean2 = new Book();
-//			bBean2.setBookname(bookname);
-//			session.get("bookname", bookname);
-//			System.out.println("bookname = "+bookname);
-//	
-//			session.delete(bBean);
+	public boolean deleteById(int id) {   //用ID刪除
+		System.out.println("ID = "+id);	
+			Book bBean = new Book();
+			bBean.setId(id);		
+			session.delete(bBean);
 			session.getTransaction().commit();
-			
 		return true;
+	}
+	
+	@Override
+	public List<Book> deleteByName(String name) {   //用書名刪除 已成功
+		System.out.println("正在執行Delete By Name方法 1");
+		Query<Book> query = session.createQuery("from Book where bookname like '%"+name+"%'", Book.class);
+		System.out.println("正在執行Delete By Name方法 2");
+		List<Book> list = query.list();
+		System.out.println("正在執行Delete By Name方法 3");
+		 for(Book book: list) {
+		 System.out.println("id:" + book.getId());
+		 System.out.println("name:" + book.getBookname());
+		   //先用name查找出ID 再用ID刪
+			int bookId=book.getId();		
+			 session.delete(book);
+			 System.out.println("刪除成功");
+		 
+		 }
+
+		
+		
+		
+		return query.list();
 	}
 
 }
