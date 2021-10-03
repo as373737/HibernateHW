@@ -126,7 +126,10 @@ input, textarea, select {
 
     
    </table>
-
+   <div align="center">
+    <br><a href="home.jsp"><button class="button" >回首頁</button></a>
+   </div>
+	
   
   </form>
  </div>
