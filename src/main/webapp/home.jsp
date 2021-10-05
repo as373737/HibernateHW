@@ -195,7 +195,7 @@ body {
 		<ul class="dropdown">
 
 
-			<li><a href="login.jsp">會員登入</a></li>
+			<li><a href="./LogoutServletAction.do">會員登出</a></li>
 
 		</ul>
 	</nav>

@@ -13,7 +13,7 @@
 
 		
 		<mapping class="HibernateHW.model.Book" />
-	
+		<mapping class="HibernateHW.model.Member" />
 		
 		
     </session-factory>
