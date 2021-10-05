@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="HibernateHW.model.Book"%>
 <%@ page import="java.util.List"%>
+<%@ page import="org.hibernate.SessionFactory"%>
+<%@ page import="HibernateHW.util.HibernateUtil"%>
+<%@ page import="org.hibernate.Session"%>
+<%@ page import="HibernateHW.model.BookDao"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -207,19 +211,14 @@ hr.style14 {
  <div class="leftSide">
   <h1 class="p">查詢商品</h1>
  
-	<form action="./HibernateServletAction.do" method="post">
-		<center>	
-
-			<button type="submit" name="selectALL">查詢全部</button>
-		</center>
-	
-	</form>
 
 		<hr class="style14">
 	</div>
 	<%
-	List<Book> selectAll = (List<Book>) request.getSession(true).getAttribute("resultList");
-	if (selectAll != null) {
+	SessionFactory factory = HibernateUtil.getSessionFactory();
+	BookDao bDao = new BookDao(factory.getCurrentSession());
+	List<Book> resultList = bDao.selectAll();
+	if (resultList != null) {
 	%>
 	<table border="1">
 		<th>編號</th>
@@ -227,8 +226,8 @@ hr.style14 {
 		<th>作者</th>
 		<th>價錢</th>
 		<%
-		for (int i = 0; i < selectAll.size(); i++) {
-			Book book = selectAll.get(i);
+		for (int i = 0; i < resultList.size(); i++) {
+			Book book = resultList.get(i);
 		%>
 		<tr>
 			<td>
