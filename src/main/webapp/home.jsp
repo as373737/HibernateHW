@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>首頁</title>
 <style>
 .header {
 	width: 100%;
@@ -12,7 +12,6 @@
 	background: rgb(203, 218, 218);
 	color: white;
 	font-size: 50px;
-	padding-left: 30px;
 	position: fixed;
 	top: 0px;
 	z-index: 5000;
@@ -33,13 +32,14 @@
 }
 
 
-nav{
+.nav1{
  	float:right;
  	position: fixed;
  	 top:0;
  	 right:0;
  	 z-index: 6000;
 }
+
 
 ul{
   margin: 10px 0;
@@ -118,21 +118,79 @@ ul.dropdown ul li a i{
 		color:red;
 }
 
-div {
-	display: flex;
-	width: 480px;
-	border: lightblue 3px solid;
-	margin: 0 auto;
+
+body {
+    background-color: #eee;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.nav2 {
+    display: block;
+    font: 13px Helvetica, Tahoma, serif;
+    text-transform: uppercase;
+    margin: 0; 
+    padding: 0;
+}
+
+
+.nav2 li {
+    display: inline-block;
+    list-style: none;
+    top:0px
+}
+
+.nav2 .button-dropdown {
+    position: relative;
+    
+}
+
+.nav2 li a {
+    display: block;
+    color: #333;
+    background-color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.nav2 li a span {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 10px;
+    color: #999;
+}
+
+.nav2 li a:hover, .nav li a.dropdown-toggle.active {
+    background-color: #289dcc;
+    color: #fff;
+}
+
+.nav2 li a:hover span, .nav li a.dropdown-toggle.active span {
+    color: #fff;
+}
+
+.nav2 li .dropdown-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    margin-top: 3px;
+    text-align: left;
+}
+
+.nav2 li .dropdown-menu.active {
+    display: block;
+}
+
+.nav2 li .dropdown-menu a {
+    width: 150px;
 }
 </style>
 </head>
-<link rel="stylesheet"
-	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-	crossorigin="anonymous" />
 <body>
-		
-	<nav>
+		 
+	<nav class="nav1" >
 
 		<ul class="dropdown">
 
@@ -142,45 +200,86 @@ div {
 		</ul>
 	</nav>
 	<div class="header" >
-			E Book Store<span style="font-size:30 ;color:#fff ; font-weight:200;">× Make money what you like</span>
+			E Book Store<span style="font-size:30 ;color:#fff ; font-weight:200;"></span>
 	</div>
 <br><br><br><br><br>
 	<div>
-		<form action=".\select.jsp" method="post">
-
-			<button class='btn btn-default' type='submit' value='submit'
-				style="width: 120px; height: 50px; font-size: 30px;">
-				<i class="fas fa-search"></i>查詢
-			</button>
-
-		</form>
-		<form action=".\insert.jsp" method="post">
-
-			<button class='btn btn-default' type='submit' value='submit'
-				style="width: 120px; height: 50px; font-size: 30px;">
-				<i class="fas fa-plus-square"></i>新增
-			</button>
-
-		</form>
-
-
-		<form action=".\update.jsp" method="post">
-
-			<button class='btn btn-default' type='submit' value='submit'
-				style="width: 120px; height: 50px; font-size: 30px;">
-				<i class="fas fa-pencil-alt"></i>修改
-			</button>
-
-		</form>
-		<form action=".\delete.jsp" method="post">
-
-			<button class='btn btn-default' type='submit' value='submit'
-				style="width: 120px; height: 50px; font-size: 30px;">
-				<i class="fas fa-trash-alt"></i>刪除
-			</button>
-
-		</form>
-	</div>
+		<ul class="nav2">
+  <li>
+    <a href=".\insert.jsp">
+      新增
+      
+    </a>
+  </li>
+  <li class="button-dropdown">
+    <a href="javascript:void(0)" class="dropdown-toggle">
+      查詢 <span>▼</span>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href=".\select.jsp">
+          書名查詢
+        </a>
+      </li>
+      <li>
+        <a href=".\selectall.jsp">
+          全部查詢
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href=".\update.jsp">
+      修改
+    </a>
+  </li>
+  <li class="button-dropdown">
+    <a href="javascript:void(0)" class="dropdown-toggle">
+      刪除 <span>▼</span>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href=".\deletebyid.jsp">
+          ID刪除
+        </a>
+      </li>
+       <li>
+        <a href=".\deletebyname.jsp">
+          書名刪除
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+	
+		</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>
+	jQuery(document).ready(function (e) {
+	    function t(t) {
+	        e(t).bind("click", function (t) {
+	            t.preventDefault();
+	            e(this).parent().fadeOut()
+	        })
+	    }
+	    e(".dropdown-toggle").click(function () {
+	        var t = e(this).parents(".button-dropdown").children(".dropdown-menu").is(":hidden");
+	        e(".button-dropdown .dropdown-menu").hide();
+	        e(".button-dropdown .dropdown-toggle").removeClass("active");
+	        if (t) {
+	            e(this).parents(".button-dropdown").children(".dropdown-menu").toggle().parents(".button-dropdown").children(".dropdown-toggle").addClass("active")
+	        }
+	    });
+	    e(document).bind("click", function (t) {
+	        var n = e(t.target);
+	        if (!n.parents().hasClass("button-dropdown")) e(".button-dropdown .dropdown-menu").hide();
+	    });
+	    e(document).bind("click", function (t) {
+	        var n = e(t.target);
+	        if (!n.parents().hasClass("button-dropdown")) e(".button-dropdown .dropdown-toggle").removeClass("active");
+	    })
+	});
+	</script>
 
 </body>
 </html>

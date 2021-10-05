@@ -76,7 +76,7 @@ public class HibernateServletAction extends HttpServlet {
 		BookDao bDao = new BookDao(session);
 		List<Book> resultList = bDao.selectAll();
 		request.getSession(true).setAttribute("resultList", resultList);
-		request.getRequestDispatcher("/select.jsp").forward(request, response);
+		request.getRequestDispatcher("/selectall.jsp").forward(request, response);
 	}
 	
 

@@ -1,27 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="HibernateHW.model.Book"%>
+<%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>修改 | ID修改</title>
+<title>查詢 | 全部查詢</title>
 <style>
-
-.byline p {
-	text-align: center;
-	color: #c6c6c6;
-	font: bold 18px Arial, Helvetica, Sans-serif;
-	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-}
-
-.byline p a {
-	color: #d83c3c;
-	text-decoration: none;
-}
-
-
-
-
 body {
 	font-size: 20px;
 	font-weight: 500;
@@ -208,6 +194,12 @@ table tbody input {
             color: #fff;
             transform: translateY(-7px);
         }
+        	
+        .div{
+         display: flex;
+   		 justify-content: center; 
+   		 align-items: center; 
+        }
 
 
 .input {
@@ -217,50 +209,64 @@ table tbody input {
 </style>
 </head>
 <body>
-<!--  
-	<form action="./HibernateServletAction.do" class="form-wrapper cf"
-		method="post" id="form">
-
-
-		<input name="updateid" id="updateid" type="number" placeholder="請輸入書籍代碼"
-			required>
-		<button name="update" id="update" type="submit">送出</button>
-
-	</form>
-	-->
-	
-	 <div class="leftSide">
-  	<h1 class="p">修改商品</h1>
+ <div class="leftSide">
+  <h1 class="p">查詢商品</h1>
  
 	<form action="./HibernateServletAction.do" method="post">
-		<center>
-			<label>書名ID</label> <input name="updateid" id="updateid" type="number""  placeholder="請輸入書籍代碼" class="input" required>
+		<center>	
 
-			<button type="submit" name="update">送出</button>
-
+			<button type="submit" name="selectALL">查詢全部</button>
 		</center>
 
 	</form>
 
-	<a href="home.jsp"><button class="button">回首頁</button></a>
-
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script>
-
 	
-	$(document).ready(function(){
-		$("#update").click(function(){
-			if($("#updateid").val()==""){
-				alert("請填寫代碼");
-				eval("document.form['updateid'].focus()");  
-				}else{
-				document.form.submit();
-				}
-		})
+	<%
+	List<Book> selectAll = (List<Book>) request.getSession(true).getAttribute("resultList");
+	if (selectAll != null) {
+	%>
+	<table border="1">
+		<th>編號</th>
+		<th>書名</th>
+		<th>作者</th>
+		<th>價錢</th>
+		<%
+		for (int i = 0; i < selectAll.size(); i++) {
+			Book book = selectAll.get(i);
+		%>
+		<tr>
+			<td>
+				<%
+				out.write("ID:" + book.getId());
+				%>
+			</td>
+			<td>
+				<%
+				out.write(book.getBookname());
+				%>
+			</td>
+			<td>
+				<%
+				out.write(book.getAuthor());
+				%>
+			</td>
+			<td>
+				<%
+				out.write("$" + book.getPrice() + "元<br>");
+				%>
+			</td>
+			<%
+			}
+			}
+			request.getSession(true).removeAttribute("resultList");
+			%>
+		</tr>
+	</table>
 
-		})
+		<div class=div>
+    			<a href="home.jsp"><button class="button" >回首頁</button></a>
+    		</div>
 	
-	</script>
 
 </body>
 </html>

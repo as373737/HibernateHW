@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>刪除 | 書名刪除</title>
 <style>
 body {
  font-family: "微軟正黑體";
@@ -84,6 +84,11 @@ input, textarea, select {
             color: #fff;
             transform: translateY(-7px);
         }
+        .div{
+          display: flex;
+  		  justify-content: center; 
+    	  align-items: center; 
+        }
 </style>
 </head>
 <body>
@@ -99,7 +104,7 @@ input, textarea, select {
 <form action="./HibernateServletAction.do" method="post">
    
    <table rules="all">
-       <h4 style="font-size: 20px;">請則一輸入 (書名 or ID)</h4>
+       <h4 style="font-size: 20px;">輸入書名刪除資料</h4>
     <tr>
      <td>請輸入書名 :</td>
      <td><input type="text" class="inputClass" name="bookname">
@@ -110,28 +115,19 @@ input, textarea, select {
     
     </td>
     </tr>
-    <tr>
-     <td>請輸入ID :</td>
-     <td><label for="proName"></label> <input type="text" 
-         class="inputClass" name="bookid">
-
-
-         <div class="wrap">
-            <button type="submit" name="deleteById" class="button">使用ID刪除</button>
-        </div>
-        
-        </td>
-    </tr>
+  
 
 
     
    </table>
    <div align="center">
-    <br><a href="home.jsp"><button class="button" >回首頁</button></a>
    </div>
 	
   
   </form>
+  <div class=div>
+    <a href="home.jsp"><button class="button" >回首頁</button></a>
+    </div>
  </div>
 
  
