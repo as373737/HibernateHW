@@ -137,7 +137,7 @@ div {
 		<ul class="dropdown">
 
 
-			<li><a href="./LogoutServletAction.do">會員登出</a></li>
+			<li><a href="login.jsp">會員登入</a></li>
 
 		</ul>
 	</nav>
@@ -145,42 +145,7 @@ div {
 			E Book Store<span style="font-size:30 ;color:#fff ; font-weight:200;">× Make money what you like</span>
 	</div>
 <br><br><br><br><br>
-	<div>
-		<form action=".\select.jsp" method="post">
-
-			<button class='btn btn-default' type='submit' value='submit'
-				style="width: 120px; height: 50px; font-size: 30px;">
-				<i class="fas fa-search"></i>查詢
-			</button>
-
-		</form>
-		<form action=".\insert.jsp" method="post">
-
-			<button class='btn btn-default' type='submit' value='submit'
-				style="width: 120px; height: 50px; font-size: 30px;">
-				<i class="fas fa-plus-square"></i>新增
-			</button>
-
-		</form>
-
-
-		<form action=".\update.jsp" method="post">
-
-			<button class='btn btn-default' type='submit' value='submit'
-				style="width: 120px; height: 50px; font-size: 30px;">
-				<i class="fas fa-pencil-alt"></i>修改
-			</button>
-
-		</form>
-		<form action=".\delete.jsp" method="post">
-
-			<button class='btn btn-default' type='submit' value='submit'
-				style="width: 120px; height: 50px; font-size: 30px;">
-				<i class="fas fa-trash-alt"></i>刪除
-			</button>
-
-		</form>
-	</div>
+	
 
 </body>
 </html>
