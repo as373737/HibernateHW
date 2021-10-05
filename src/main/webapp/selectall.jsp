@@ -38,23 +38,7 @@ input, textarea, select {
 	background-color: rgb(203, 218, 218, 0.2);
 }
 
-form {
-	background-color: rgb(255, 255, 255, 0.8);
-	margin: 20px auto;
-	max-width: 820px;
-	padding: 80px;
-	/* border-radius: 20px; */
-	box-shadow: 0 10px 10px 0 rgba(177, 175, 175, 0.2);
-}
 
-.form-group__file {
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	width: 100%;
-	min-width: 130px;
-	height: 180px;
-}
 
 .file-label {
 	margin: 10px 0;
@@ -206,6 +190,17 @@ table tbody input {
 	width: 300px;
 	height: 25px;
 }
+hr.style14 { 
+  border: 0; 
+  height: 1px; 
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
+}
+
+
+
 </style>
 </head>
 <body>
@@ -217,10 +212,11 @@ table tbody input {
 
 			<button type="submit" name="selectALL">查詢全部</button>
 		</center>
-
+	
 	</form>
 
-	
+		<hr class="style14">
+	</div>
 	<%
 	List<Book> selectAll = (List<Book>) request.getSession(true).getAttribute("resultList");
 	if (selectAll != null) {

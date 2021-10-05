@@ -178,7 +178,7 @@ td {
 }
 
 th {
-	height: 100px;
+	height: 50px;
 	background-color: rgb(126, 199, 199);
 }
 /* table .ck {
@@ -224,6 +224,16 @@ table tbody input {
 	width: 300px;
 	height: 25px;
 }
+
+hr.style14 { 
+  border: 0; 
+  height: 1px; 
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
+}
+
 </style>
 </head>
 <body>
@@ -239,9 +249,10 @@ table tbody input {
 		</center>
 
 	</form>
+	
 
-
-
+	<hr class="style14">
+</div>
 	<%
 	List<Book> selectLikeName = (List<Book>) request.getSession(true).getAttribute("resultBean");
 	if (selectLikeName != null) {
