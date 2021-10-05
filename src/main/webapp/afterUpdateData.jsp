@@ -137,8 +137,8 @@ input, textarea, select {
    
    
  </table>
- 	    <a><button name="update" id="update" type="submit" class="button">ªð¦^</button></a>
  	   
+ 	    <a><button name="update" id="update" type="submit" class="button">ªð¦^</button></a>
 
  </form>
 	  	<a href="updateSuccess.jsp"><button  name="confirm" id="confirm" class="button">½T©w</button></a>
