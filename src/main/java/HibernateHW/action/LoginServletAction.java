@@ -40,7 +40,7 @@ public class LoginServletAction extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
-//		String msg = String.format("±b¸¹:%s, ±K½X:%s", account,password);
+//		String msg = String.format("ï¿½bï¿½ï¿½:%s, ï¿½Kï¿½X:%s", account,password);
 //		out.write(msg);
 		
 		
@@ -52,18 +52,18 @@ public class LoginServletAction extends HttpServlet {
 			HttpSession session1 = request.getSession(true);
 			session1.setAttribute("user", user);
 			request.getRequestDispatcher("/home.jsp").forward(request, response);
-			out.write("µn¤J¦¨¥\");
+			out.write("");
 		}else {
 			request.getRequestDispatcher("/loginfailure.jsp").forward(request, response);
-//			out.write("µn¤J¥¢±Ñ");
+//			out.write("ï¿½nï¿½Jï¿½ï¿½ï¿½ï¿½");
 		}
 //		List<Member> lists=mdao.selectAll();
 //		
 //		for(Member mBean:lists) {
 //			if((account.equals(mBean.getAccount()))&&(password.equals(mBean.getPassword())) ){
-//				out.write("µn¤J¦¨¥\");
+//				out.write("ï¿½nï¿½Jï¿½ï¿½ï¿½\");
 //			}else {
-//				out.write("µn¤J¥¢±Ñ");
+//				out.write("ï¿½nï¿½Jï¿½ï¿½ï¿½ï¿½");
 //			}
 //		}
 		
