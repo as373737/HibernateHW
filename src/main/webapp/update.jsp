@@ -234,7 +234,7 @@ table tbody input {
  
 	<form action="./HibernateServletAction.do" method="post">
 		<center>
-			<label>書名ID</label> <input name="updateid" id="updateid" type="number""  placeholder="請輸入書籍代碼" class="input" required>
+			<label>書籍ID</label> <input name="updateid" id="updateid" type="number""  placeholder="請輸入書籍ID" class="input" required>
 
 			<button type="submit" name="update">送出</button>
 
@@ -251,7 +251,7 @@ table tbody input {
 	$(document).ready(function(){
 		$("#update").click(function(){
 			if($("#updateid").val()==""){
-				alert("請填寫代碼");
+				alert("請填寫書籍ID");
 				eval("document.form['updateid'].focus()");  
 				}else{
 				document.form.submit();
